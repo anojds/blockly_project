@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="custom_block.js"></script>
+  <script src="custom_block_gen.js"></script>
+  <script src="ko.js"></script>
+</head>
+
+<body style="margin: 0px">
+  <xml id="toolbox" style="display: none">
+
+    <category name="논리" colour="210">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="반복">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="수학">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+    </category>
+    <category name="텍스트">
+      <block type="text"></block>
+      <block type="text_length"></block>
+      <block type="text_print"></block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <block type="text"></block>
+        </value>
+      </block>
+    </category>
+    <category name="변수" custom="VARIABLE"></category>
+    <category name="함수" custom="PROCEDURE"></category>
+    <label text="Another label"></label>
+    <category name="My" colour="120">
+      <block type="print_block"></block>
+      <label text="Another label"></label>
+    </category>
+  </xml>
+  <div id="blocklyDiv" style="height: 100vh; width: 100vw;"></div>
+  <textarea id="textarea"></textarea>
+  <script>
+    var toolbox = document.getElementById('toolbox');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    
+
+    var options = {
+      toolbox: toolbox,
+      collapse: true,
+      comments : false,
+      maxBlocks: Infinity,
+      trashcan: true,
+      tooltips: true,
+      css: true,
+      media: 'https://blockly-demo.appspot.com/static/media/',
+      rtl: false,
+      scrollbars: true,
+      sounds: true,
+      oneBasedIndex: true,
+      renderer: "thrasos",
+      theme: "zelos"
+    };
+
+
+    var workspace = Blockly.inject(blocklyDiv, options);
+    function myUpdateFunction(event) {
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      document.getElementById('textarea').value = code;
+    }
+    workspace.addChangeListener(myUpdateFunction);
+  </script>
+
+  </div>
+</body>
+
+</html>
